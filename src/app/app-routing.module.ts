@@ -6,6 +6,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { dashboardRoutes } from './dashboard/dashboard-routes';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: 'inicio-sesion', component: LoginComponent },
@@ -13,7 +14,10 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    children: dashboardRoutes
+    children: dashboardRoutes,
+    canActivate: [
+      AuthGuard
+    ]
 
       // { path: 'dash', loadChildren: () => import('../app/dashboard/dashboard.module').then(m => m.DashboardModule) },
 
