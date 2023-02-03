@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AuthModule } from './auth/auth.module';
-import { SharedModule } from './shared/shared.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 import { AppComponent } from './app.component';
@@ -17,7 +17,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
 
     AuthModule,
-    SharedModule,
+    DashboardModule,
 
     AppRoutingModule,
   ],
