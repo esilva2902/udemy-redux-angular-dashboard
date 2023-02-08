@@ -72,12 +72,18 @@
     </div>
   </div>
 
-  <div class="col-12 p-5">
+  <div *ngIf="ingressEgressIndex['ingreso'].itemsTotal > 0 || ingressEgressIndex['egreso'].itemsTotal"
+      class="col-12 p-5">
+
       <div class="card card-statistics">
         <div class="card-body">
           <h1 class="card-title">Gr&aacute;fica</h1>
 
-            <!-- grÃ¡fica ira aquÃ­ -->
+            <!-- Chart.js -->
+            <canvas baseChart class="chart"
+              [data]="doughnutChartData"
+              [type]="doughnutChartType">
+            </canvas>
 
         </div>
       </div>

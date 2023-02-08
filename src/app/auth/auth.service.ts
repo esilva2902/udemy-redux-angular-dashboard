@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
-import { Subscription, Observable, map, switchMap, EMPTY } from 'rxjs';
+import { Subscription, Observable, map, switchMap, EMPTY, from } from 'rxjs';
 
 import { AppState } from 'src/app/app.reducer';
 import { User } from './../models/user.model';
@@ -53,8 +53,15 @@ export class AuthService implements OnDestroy {
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
-  logout(): Promise<void> {
-    return this.afAuth.signOut();
+  logout(): Observable<void> {
+    return from(new Promise<void>(async (resolve, reject) => {
+      try {
+        await this.afAuth.signOut();
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    }));
   }
 
   isAuth(): Observable<boolean> {

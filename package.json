@@ -1,6 +1,6 @@
 {
   "name": "ingress-egress-app",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "ng": "ng",
     "ng-dev": "clear && ng serve --port 4215 --poll 3000",
@@ -26,9 +26,11 @@
     "@ngrx/store": "^15.2.1",
     "@ngrx/store-devtools": "^15.2.1",
     "bootstrap": "^5.2.3",
+    "chart.js": "^4.2.0",
     "firebase": "9.16.0",
+    "ng2-charts": "^4.1.1",
     "rxjs": "~7.8.0",
-    "sweetalert2": "^11.7.1",
+    "sweetalert2": "^11.4.8",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },
