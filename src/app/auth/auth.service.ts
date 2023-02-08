@@ -10,12 +10,14 @@ import { Subscription, Observable, map, switchMap, EMPTY } from 'rxjs';
 import { AppState } from 'src/app/app.reducer';
 import { User } from './../models/user.model';
 import * as authActions from '../auth/auth.actions';
+import * as ingressEgressActions from '../ingress-egress/ingress-egress.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService implements OnDestroy {
 
+  private _firebaseUser: firebase.default.User | null;
   private changeFirebaseUserSubscription: Subscription = Subscription.EMPTY;
 
   constructor(
@@ -23,7 +25,12 @@ export class AuthService implements OnDestroy {
     private firestore: AngularFirestore,
     private store: Store<AppState>) {
 
+    this._firebaseUser = null;
     this.setChangeFirebaseUserSubscription();
+  }
+
+  get firebaseUser(): firebase.default.User | null {
+    return this._firebaseUser;
   }
 
   ngOnDestroy(): void {
@@ -60,9 +67,14 @@ export class AuthService implements OnDestroy {
     this.changeFirebaseUserSubscription.unsubscribe();
     this.changeFirebaseUserSubscription = this.afAuth.authState.pipe(
       switchMap(fuser => {
+        // Always take the returned user from Firebase:
+        this._firebaseUser = fuser;
+
         if (!fuser) {
           // Set the current user as null:
           this.store.dispatch(authActions.unSetUser());
+          // Clear the IngressEgress items from the store:
+          this.store.dispatch(ingressEgressActions.unsetItems());
           // Complete the stream:
           return EMPTY;
         }

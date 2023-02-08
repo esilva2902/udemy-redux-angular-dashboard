@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../shared/shared.module';
+import { IngressEgressModule } from '../ingress-egress/ingress-egress.module';
 
 import { DashboardComponent } from './dashboard.component';
 @NgModule({
@@ -13,6 +14,8 @@ import { DashboardComponent } from './dashboard.component';
     CommonModule,
     RouterModule,
     SharedModule,
+
+    IngressEgressModule
   ],
   exports: [
     DashboardComponent

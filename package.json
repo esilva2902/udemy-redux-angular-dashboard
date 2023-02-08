@@ -1,6 +1,6 @@
 {
   "name": "ingress-egress-app",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "scripts": {
     "ng": "ng",
     "ng-dev": "clear && ng serve --port 4215 --poll 3000",
