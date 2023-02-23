@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { finalize, Subject } from 'rxjs';
+import { finalize, Subject, takeUntil } from 'rxjs';
 import Swal from 'sweetalert2';
 
 import { AppState } from 'src/app/app.reducer';
@@ -34,13 +34,14 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.store.select(appState => appState.ingressEgress)
-      .subscribe({
-        next: ingressEgressState => {
-          this.ingressEgressDocs = ingressEgressState.items;
-          this.cdr.markForCheck();
-        }
-      });
+    this.store.select(appState => appState.ingressEgress).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe({
+      next: ingressEgressState => {
+        this.ingressEgressDocs = ingressEgressState ? ingressEgressState.items : [ ];
+        this.cdr.markForCheck();
+      }
+    });
   }
 
   ngOnDestroy(): void {

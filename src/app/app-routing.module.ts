@@ -3,25 +3,31 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
-import { dashboardRoutes } from './dashboard/dashboard-routes';
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
+  { path: '', pathMatch : 'full', redirectTo: 'dummy' },
   { path: 'inicio-sesion', component: LoginComponent },
   { path: 'registro', component: RegisterComponent },
   {
     path: '',
-    component: DashboardComponent,
-    children: dashboardRoutes,
-    canActivate: [
-      AuthGuard
+    canMatch: [ AuthGuard ],
+    canActivate: [AuthGuard ],
+    children: [
+      { path: 'gastos', loadChildren: () => import('./ingress-egress/ingress-egress.module').then(m => m.IngressEgressModule) }
     ]
-
-      // { path: 'dash', loadChildren: () => import('../app/dashboard/dashboard.module').then(m => m.DashboardModule) },
-
   },
+
+  {
+    path: '',
+    canMatch: [ AuthGuard ],
+    canActivate: [AuthGuard ],
+    children: [
+      { path: 'dummy', loadChildren: () => import('./dummy/dummy.module').then(m => m.DummyModule) }
+    ]
+  },
+
   { path: '**', redirectTo: '' },
 ];
 

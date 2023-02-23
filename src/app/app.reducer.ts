@@ -6,12 +6,12 @@ import * as ingressEgress from './ingress-egress/ingress-egress.reducer';
 export interface AppState {
   ui: ui.LoadingState,
   auth: auth.UserState
-  ingressEgress: ingressEgress.IngressEgressState
+  ingressEgress?: ingressEgress.IngressEgressState
 }
 
 // This object represents the Global state of the App:
 export const appReducers: ActionReducerMap<AppState> = {
   ui: ui.uiReducer,
   auth: auth.userReducer,
-  ingressEgress: ingressEgress.ingressEgressReducer
+  // ingressEgress: ingressEgress.ingressEgressReducer
 }

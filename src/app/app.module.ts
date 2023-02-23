@@ -12,7 +12,6 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 
 import { AuthModule } from './auth/auth.module';
-import { DashboardModule } from './dashboard/dashboard.module';
 
 import { AppComponent } from './app.component';
 import { appReducers } from './app.reducer';
@@ -38,8 +37,6 @@ import { appReducers } from './app.reducer';
     }),
 
     AuthModule,
-    DashboardModule,
-
     AppRoutingModule,
   ],
   providers: [],

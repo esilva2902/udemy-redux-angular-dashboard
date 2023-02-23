@@ -4,21 +4,20 @@ import { Store } from '@ngrx/store';
 
 import { filter, Subject, switchMap, takeUntil, EMPTY } from 'rxjs';
 
-import { AppState } from '../app.reducer';
-import * as ingressEgressActions from '../ingress-egress/ingress-egress.actions';
+import { AppState } from '../../app.reducer';
+import * as ingressEgressActions from '../ingress-egress.actions';
 
-import { IngressEgressService } from '../ingress-egress/ingress-egress.service';
+import { IngressEgressService } from '../ingress-egress.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  selector: 'app-shell',
+  templateUrl: './shell.component.html',
+  styleUrls: ['./shell.component.scss'],
 
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardComponent implements OnInit, OnDestroy {
-
+export class ShellComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void>;
 
   constructor(

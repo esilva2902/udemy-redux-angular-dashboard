@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, OnInit, OnDestro
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { Subject, takeUntil, filter, map } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 import { AppState } from 'src/app/app.reducer';
 import { AuthService } from 'src/app/auth/auth.service';

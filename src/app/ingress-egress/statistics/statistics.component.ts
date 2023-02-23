@@ -2,7 +2,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { ChartData, ChartEvent, ChartType } from 'chart.js';
+import { ChartData, ChartType } from 'chart.js';
 
 import { AppState } from 'src/app/app.reducer';
 import { AmountType, IngressEgressDoc, IngressEgressIndex } from 'src/app/models/ingress-egress.model';
@@ -45,7 +45,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe({
       next: ingressEgressState => {
-        this.getTotals(ingressEgressState.items);
+        this.getTotals(ingressEgressState ? ingressEgressState.items : [ ]);
         this.cdr.markForCheck();
       }
     });
